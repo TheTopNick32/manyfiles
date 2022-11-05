@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>give 1 str</title>
+    <style>
+    </style>
+</head>
+<body style="font-family: sans-serif;">
+    <h1 id="js" style="color: #f00;">Для работы сайта необходимо включить JavaScript!</h1>
+    <input type="checkbox" id="bold"><b>Жирный?</b><br>
+    <input type="checkbox" id="italic"><i>Наклонённый?</i><br>
+    <input type="checkbox" id="underlined"><u>Подчёркнутый?</u><br>
+    <input type="checkbox" id="strikethrough"><s>Зачёркнутый?</s><br>
+    <input type="checkbox" id="obfuscated"><span style="font-family: Mistral;">Ызwk4IФнз)z2</span><br>
+    <input type="color" id="color" value="#ffffff"><select id="default">
+        <span style="color: rgb(0,0,0);"></span><option value="black">black</option></span>
+        <span style="color: rgb(0,0,167);"></span><option value="dark_blue">dark_blue</option></span>
+        <span style="color: rgb(0,167,0);"></span><option value="dark_green">dark_green</option></span>
+        <span style="color: rgb(0,167,167);"></span><option value="dark_aqua">dark_aqua</option></span>
+        <span style="color: rgb(167,0,0);"></span><option value="dark_red">dark_red</option></span>
+        <span style="color: rgb(167,0,167);"></span><option value="dark_purple">dark_purple</option></span>
+        <span style="color: rgb(251,167,0);"></span><option value="gold">gold</option></span>
+        <span style="color: rgb(167,167,167);"></span><option value="gray">gray</option></span>
+        <span style="color: rgb(84,84,84);"></span><option value="dark_gray">dark_gray</option></span>
+        <span style="color: rgb(84,84,251);"></span><option value="blue">blue</option></span>
+        <span style="color: rgb(84,251,84);"></span><option value="green">green</option></span>
+        <span style="color: rgb(84,251,251);"></span><option value="aqua">aqua</option></span>
+        <span style="color: rgb(251,84,84);"></span><option value="red">red</option></span>
+        <span style="color: rgb(251,84,251);"></span><option value="light_purple">light_purple</option></span>
+        <span style="color: rgb(251,251,84);"></span><option value="yellow">yellow</option></span>
+        <span style="color: rgb(251,251,251);"></span><option value="white">white</option></span>
+    </select> Цвет <select id="isColor" onchange="color()">
+        <option value="0">Стандартный</option>
+        <option value="1">Уже существующий</option>
+        <option value="2">Пользовательский</option>
+    </select><br>
+    <input type="text" id="nid" placeholder="Идентефикатор"><br>
+    <input type="text" id="text" placeholder="Название"><br>
+    <button id="but">Ввести следующее значение</button><br>
+    <code>/give @p ...{display:{Name:'[{...}]'}}</code>
+
+    <script>
+        document.getElementById('js').style.display="none"
+        function color() {
+            if (document.getElementById('isColor').value=='0') {
+                document.getElementById('color').style.display="none"
+                document.getElementById('default').style.display="none"
+            }
+            if (document.getElementById('isColor').value=='1') {
+                document.getElementById('color').style.display="none"
+                document.getElementById('default').style.display="inline-block"
+            }
+            if (document.getElementById('isColor').value=='2') {
+                document.getElementById('color').style.display="inline-block"
+                document.getElementById('default').style.display="none"
+            }
+        }
+        color()
+        let x = '['
+        let c = 0
+        document.getElementById('but').addEventListener('click', ()=>{
+            let b = String(0+document.getElementById('bold').checked);
+            let i = String(0+document.getElementById('italic').checked);
+            let u = String(0+document.getElementById('underlined').checked);
+            let s = String(0+document.getElementById('strikethrough').checked);
+            let o = String(0+document.getElementById('obfuscated').checked);
+            if (document.getElementById('isColor').value=='0') {
+                c = "#ffffff";
+            }
+            if (document.getElementById('isColor').value=='1') {
+                c = "#ffffff";
+            }
+            if (document.getElementById('isColor').value=='2') {
+                c = document.getElementById('color').value;
+            }
+            let id = document.getElementById('nid').value;
+            let a = b+i+u+s+o+c+(document.getElementById('text').value);
+            if (a.substring(0,1) == '1') {
+                b = 'true';
+            }
+            if (a.substring(1,2) == '1') {
+                i = 'true';
+            }
+            if (a.substring(2,3) == '1') {
+                o = 'true';
+            }
+            if (a.substring(3,4) == '1') {
+                s = 'true';
+            }
+            if (a.substring(4,5) == '1') {
+                u = 'true';
+            }
+            if (a.substring(0,1) == '0') {
+                b = 'false';
+            }
+            if (a.substring(1,2) == '0') {
+                i = 'false';
+            }
+            if (a.substring(2,3) == '0') {
+                o = 'false';
+            }
+            if (a.substring(3,4) == '0') {
+                s = 'false';
+            }
+            if (a.substring(4,5) == '0') {
+                u = 'false';
+            }
+            if (document.getElementById('isColor').value=='0') {
+                a = '{"text":"'+a.substring(12,a.length)+'","bold":'+b+',"italic":'+i+',"obfuscated":'+o+',"strikethrough":'+s+',"underlined":'+u+'},';
+            }
+            if (document.getElementById('isColor').value=='1') {
+                a = '{"text":"'+a.substring(12,a.length)+'","bold":'+b+',"italic":'+i+',"obfuscated":'+o+',"strikethrough":'+s+',"underlined":'+u+',"color":"'+document.getElementById('default').value+'"},';
+            }
+            if (document.getElementById('isColor').value=='2') {
+                a = '{"text":"'+a.substring(12,a.length)+'","bold":'+b+',"italic":'+i+',"obfuscated":'+o+',"strikethrough":'+s+',"underlined":'+u+',"color":"#'+a.substring(6,12)+'"},';
+            }
+            x=x+a;
+            document.querySelector('code').innerHTML=('/give @p '+id+'{display:{Name:\''+x.substring(0,(x.length-1))+']\'}}');
+        })
+    </script>
+</body>
+</html>
