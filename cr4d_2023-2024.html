@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="title">Click to change year</title>
+    <style>
+        body {
+            background: black;
+        }
+        * {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;   
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            -khtml-user-select: none
+        }
+    </style>
+</head>
+<body>
+    <img src="20k20k-2023.png" alt="" style="width: 10000px; height: 10000px; position: absolute; top: -1900; left: 0;">
+    <img src="20k20k-2024.png" alt="" style="width: 10000px; height: 10000px; position: absolute; top: -1900; left: 0;" class="a">
+
+    <script>
+        const a = document.querySelector(".a");
+        const title = document.querySelector(".title");
+        document.addEventListener("click", ()=>{
+            a.style.opacity = 1 - a.style.opacity;
+            if (a.style.opacity == 1) {
+                title.innerHTML = "CR4D 2024";
+            } else {
+                title.innerHTML = "CR4D 2023";
+            }
+        })
+    </script>
+</body>
+</html>
